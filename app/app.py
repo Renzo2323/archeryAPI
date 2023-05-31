@@ -1,20 +1,20 @@
-from flask import Flask, jsonify, request, send_file, json, abort, redirect, Response, render_template
+from flask import Flask, jsonify, request, send_file, json, abort, redirect, Response, render_template, Blueprint
 import dataManager, operator
 
-app = Flask(__name__)
+main = Blueprint('main', __name__)
 
-@app.route('/api')
-@app.route('/')
+@main.route('/api')
+@main.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/docs')
+@main.route('/docs')
 def docs():
     return render_template('docs.html')
 
 # Tournament request handlers
 
-@app.route('/api/tournaments', methods=['GET', 'POST'])
+@main.route('/api/tournaments', methods=['GET', 'POST'])
 def tournamentCollectionRequestHandler():
     if request.method == 'GET':
         
@@ -43,7 +43,7 @@ def tournamentCollectionRequestHandler():
         return successMessage('Tournament created successfuly.')
     
 
-@app.route('/api/tournaments/<id>', methods=['GET', 'PATCH', 'DELETE'])
+@main.route('/api/tournaments/<id>', methods=['GET', 'PATCH', 'DELETE'])
 def tournamentRequestHandler(id):
     if request.method == 'GET':
         try:
@@ -74,7 +74,7 @@ def tournamentRequestHandler(id):
     
 # Archer request handlers
 
-@app.route('/api/tournaments/<t_id>/archers', methods=['GET', 'POST'])
+@main.route('/api/tournaments/<t_id>/archers', methods=['GET', 'POST'])
 def archerCollectionRequestHandler(t_id):
     if request.method == 'GET':
         
@@ -106,7 +106,7 @@ def archerCollectionRequestHandler(t_id):
         return successMessage('Archer registered successfuly.')
 
 
-@app.route('/api/tournaments/<t_id>/archers/<id>', methods=['GET', 'PATCH', 'DELETE'])
+@main.route('/api/tournaments/<t_id>/archers/<id>', methods=['GET', 'PATCH', 'DELETE'])
 def archerRequestHandler(t_id, id):
     if request.method == 'GET':
         try:
@@ -138,7 +138,7 @@ def archerRequestHandler(t_id, id):
 
 # Club request handlers
 
-@app.route('/api/clubs', methods=['GET'])
+@main.route('/api/clubs', methods=['GET'])
 def clubCollectionRequestHandler():
     if request.method == 'GET':
         
@@ -155,7 +155,7 @@ def clubCollectionRequestHandler():
         jsonData = json.dumps({"clubs":clubs}, sort_keys=False, indent=4) 
         return Response(jsonData, mimetype='application/json')
 
-@app.route('/api/clubs/<name>', methods=['GET'])
+@main.route('/api/clubs/<name>', methods=['GET'])
 def clubRequestHandler(name):
     if request.method == 'GET':
         try:
@@ -168,21 +168,21 @@ def clubRequestHandler(name):
 
 # Error and Success messages
 
-@app.errorhandler(400)
+@main.errorhandler(400)
 def errorHandlerBadRequest(error):
     response = jsonify({'error':{'message': str(error.description),
                         'code' : 400}})
     response.content_type = "application/json"
     return response, 400
 
-@app.errorhandler(404)
+@main.errorhandler(404)
 def errorHandlerNotFound(error):
     response = jsonify({'error':{'message': 'Resource not found.',
                         'code' : 404}})
     response.content_type = "application/json"
     return response, 404
 
-@app.errorhandler(405)
+@main.errorhandler(405)
 def errorHandlerNotFound(error):
     response = jsonify({'error':{'message': 'Method not allowed.',
                         'code' : 405}})
@@ -206,6 +206,3 @@ def validateInt(integer, name):
             e = Exception(f"{name} must be an Integer")
             abort(400, e)
 
-
-if __name__ == '__main__':
-    app.run(debug=False, port=8000, host='0.0.0.0')
