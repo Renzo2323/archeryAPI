@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ArcheryAPI - Docs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+.anchor{
+   display:block;
+   height:63px; 
+   margin-top:-63px;
+   visibility:hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="/" class="w3-bar-item w3-button w3-theme-l1">Archery API</a>
+    <a href="docs" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Docs</a>
+
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#tournament">Tournament</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#archer">Archer</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#club">Club</a>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">API Reference</h1>
+      <br>
+      <p>You can interact with the three available resources (tournaments, archers, and clubs) by using the GET, POST, PATCH, and DELETE HTTP methods.</p>
+      <p>The next section will explain how to send requests to the API's endpoints, and what information is expected to be sent and received.</p>
+
+    </div>
+  </div>
+  
+  <span class="anchor" id="tournament"></span>
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Tournament</h1>
+      <br>
+      
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments</p>
+      </div>
+      
+      <br>
+      <p>Returns a list of all tournaments.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+          "tournaments": [
+              {
+                  "name": "coolTournament",
+                  "id": 1,
+                  "rounds": 3
+              },
+              {
+                  "name": "radTournament",
+                  "id": 2,
+                  "rounds": "Not specified"
+              },
+              {
+                  "name": "awesomeTournament",
+                  "id": 3,
+                  "rounds": 5
+              }
+          ]
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Query parameters:</p>
+      <ul>
+        <li>id</li> 
+        <li>name</li>
+      </ul>
+      <br>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+
+      <div style="display: flex">
+      	<h5><b>id</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">The identifier of the tournament.</p>
+      
+      <div style="display: flex">
+      	<h5><b>rounds</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">How many rounds the tournament will last.</p>
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">POST</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments</p>
+      </div>
+      
+      <br>
+      <p>Adds a new tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Tournament created successfuly."
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Body parameters:</p>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+        <p style="padding-left: 15px">(required)</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Returns information about a specific tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+          "name": "coolTournament",
+          "id": 1,
+          "rounds": 3
+      }
+        </code>
+      </pre>
+      <br>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+
+      <div style="display: flex">
+      	<h5><b>id</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">The identifier of the tournament.</p>
+      
+      <div style="display: flex">
+      	<h5><b>rounds</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">How many rounds the tournament will last.</p>
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">PATCH</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Updates a tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Tournament updated successfuly."
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Body parameters:</p>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+        <p style="padding-left: 15px">(optional)</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+      
+      <div style="display: flex">
+      	<h5><b>rounds</b></h5><p style="padding-left: 15px">: int</p>
+        <p style="padding-left: 15px">(optional)</p>
+      </div>
+      <p style="margin-left: 20px">How many rounds the tournament will last.</p>
+      
+
+
+	  <!-- Method End-->
+      
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">DELETE</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Deletes a tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Tournament deleted successfuly."
+      }
+        </code>
+      </pre>
+
+
+	  <!-- Method End-->
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+  
+  <div class="w3-row w3-padding-64">
+  	<span class="anchor" id="archer"></span>
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Archer</h1>
+      <br>
+
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;/archers</p>
+      </div>
+      
+      <br>
+      <p>Returns a list of all archers registered in a specific tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+          "archers": [
+              {
+                  "name": "James",
+                  "id": 3,
+                  "club": "http://127.0.0.1:8000/api/clubs/coolClub",
+                  "score": 3
+              },
+              {
+                  "name": "Daniel",
+                  "id": 4,
+                  "club": "http://127.0.0.1:8000/api/clubs/coolClub",
+                  "score": 0
+              }
+          ]
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Query parameters:</p>
+      <ul>
+        <li>id</li> 
+        <li>name</li>
+        <li>score</li>
+        <li>club</li>
+      </ul>
+      <br>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+
+      <div style="display: flex">
+      	<h5><b>id</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">The identifier of the tournament.</p>
+      
+      <div style="display: flex">
+      	<h5><b>club</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">Url to the club resource to which the archer belongs to.</p>
+      
+      <div style="display: flex">
+      	<h5><b>score</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">Current score of the archer.</p>
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">POST</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;/archers</p>
+      </div>
+      
+      <br>
+      <p>Adds a new archer to a specific tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Archer registered successfuly."
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Body parameters:</p>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+        <p style="padding-left: 15px">(required)</p>
+      </div>
+      <p style="margin-left: 20px">The name of the archer.</p>
+      
+      <div style="display: flex">
+      	<h5><b>club</b></h5><p style="padding-left: 15px">: string</p>
+        <p style="padding-left: 15px">(required)</p>
+      </div>
+      <p style="margin-left: 20px">The club to which the archer belongs.</p>
+
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;/archers/&lt;archer_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Returns information about a specific archer in a specific tournament.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+          "name": "James",
+          "id": 3,
+          "club": "http://127.0.0.1:8000/api/clubs/coolClub",
+          "score": 3
+      }
+        </code>
+      </pre>
+      <br>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">The name of the tournament.</p>
+
+      <div style="display: flex">
+      	<h5><b>id</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">The identifier of the tournament.</p>
+      
+      <div style="display: flex">
+      	<h5><b>club</b></h5><p style="padding-left: 15px">: string</p>
+      </div>
+      <p style="margin-left: 20px">The club to which the archer belongs.</p>
+      
+      <div style="display: flex">
+      	<h5><b>score</b></h5><p style="padding-left: 15px">: int</p>
+      </div>
+      <p style="margin-left: 20px">Current score of the archer.</p>
+
+	  <!-- Method End-->
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">PATCH</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;/archers/&lt;archer_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Updates an archer.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Archer updated successfuly."
+      }
+        </code>
+      </pre>
+      <br>
+      <p>Body parameters:</p>
+      <div style="display: flex">
+      	<h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+        <p style="padding-left: 15px">(optional)</p>
+      </div>
+      <p style="margin-left: 20px">The name of the archer.</p>
+      
+      <div style="display: flex">
+      	<h5><b>addScore</b></h5><p style="padding-left: 15px">: int</p>
+        <p style="padding-left: 15px">(optional)</p>
+      </div>
+      <p style="margin-left: 20px">How many points were scored in a round (It's added to the archer's total score).</p>
+      
+
+
+	  <!-- Method End-->
+      
+      <br>
+      <!-- Method -->
+      <div style="display: flex">
+      	<div type="button" class="btn btn-success" style="margin-right: 15px">DELETE</div>
+        <p style="margin: auto; margin-left:0px">/api/tournaments/&lt;tournament_id&gt;/archers/&lt;archer_id&gt;</p>
+      </div>
+      
+      <br>
+      <p>Deletes an archer.</p>
+      <pre style="background-color: #3a3d3a; border-radius: 20px">
+        <code style="color:#84db84">
+      {
+        "code": 200,
+        "message": "Archer deleted successfuly."
+      }
+        </code>
+      </pre>
+
+
+	  <!-- Method End-->
+
+
+
+    </div>
+  </div>
+  
+    <span class="anchor" id="club"></span>
+
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Club</h1>
+      <br>
+      
+    <!-- Method -->
+    <div style="display: flex">
+        <div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+      <p style="margin: auto; margin-left:0px">/api/clubs</p>
+    </div>
+    
+    <br>
+    <p>Returns a list of all clubs.</p>
+    <pre style="background-color: #3a3d3a; border-radius: 20px">
+      <code style="color:#84db84">
+        {
+            "clubs": [
+                {
+                    "name": "coolClub",
+                    "firstColor": "#6391db",
+                    "secondColor": "#c92c61",
+                    "logo": "logo.svg"
+                },
+                {
+                    "name": "epicClub",
+                    "firstColor": "#c92c61",
+                    "secondColor": "#6391db",
+                    "logo": "logo.svg"
+                },
+                {
+                    "name": "radClub",
+                    "firstColor": "#6391db",
+                    "secondColor": "#c92c61",
+                    "logo": "logo.svg"
+                }
+            ]
+        }
+      </code>
+    </pre>
+    <br>
+    <p>Query parameters:</p>
+    <ul>
+      <li>name</li>
+    </ul>
+    <br>
+    <div style="display: flex">
+        <h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">The name of the club.</p>
+
+    <div style="display: flex">
+        <h5><b>firstColor</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Hexadecimal representation of the main color of the club.</p>
+    
+    <div style="display: flex">
+        <h5><b>secondColor</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Hexadecimal representation of the secondary color of the club.</p>
+
+    <div style="display: flex">
+        <h5><b>logo</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Url to the logo in svg format.</p>
+    <!-- Method End-->
+    <br>
+
+    <!-- Method -->
+    <div style="display: flex">
+        <div type="button" class="btn btn-success" style="margin-right: 15px">GET</div>
+      <p style="margin: auto; margin-left:0px">/api/clubs/&lt;club_name&gt;</p>
+    </div>
+    
+    <br>
+    <p>Returns information about a specific club.</p>
+    <pre style="background-color: #3a3d3a; border-radius: 20px">
+      <code style="color:#84db84">
+        {
+            "name": "coolClub",
+            "firstColor": "#6391db",
+            "secondColor": "#c92c61",
+            "logo": "logo.svg"
+        }
+      </code>
+    </pre>
+    <br>
+    <div style="display: flex">
+        <h5><b>name</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">The name of the tournament.</p>
+
+    <div style="display: flex">
+        <h5><b>firstColor</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Hexadecimal representation of the main color of the club.</p>
+    
+    <div style="display: flex">
+        <h5><b>secondColor</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Hexadecimal representation of the secondary color of the club.</p>
+
+    <div style="display: flex">
+        <h5><b>logo</b></h5><p style="padding-left: 15px">: string</p>
+    </div>
+    <p style="margin-left: 20px">Url to the logo in svg format.</p>
+    
+
+    <!-- Method End-->
+    
+    <br><br><br><br>
+
+    </div>
+
+    
+
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
