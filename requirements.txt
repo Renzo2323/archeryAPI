@@ -10,4 +10,4 @@ MarkupSafe==2.1.2
 psycopg2==2.9.6
 SQLAlchemy==2.0.15
 typing_extensions==4.6.2
-Werkzeug==2.3.4
+Werkzeug==2.2.3
