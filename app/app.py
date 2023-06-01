@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, send_file, json, abort, redirect, Response, render_template, Blueprint
-import dataManager, operator
+import operator
+from . import dataManager
 
 main = Blueprint('main', __name__)
 
